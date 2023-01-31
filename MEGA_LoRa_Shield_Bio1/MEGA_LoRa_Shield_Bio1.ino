@@ -27,7 +27,11 @@
   * Temperature (SO)    D28
   * Level               D30
   */
-
+//RTC
+ //lcd.setCursor(0, 0);            //Karakter dimulai pada baris 1 kolom 1
+//lcd.print("Tgl: ");             //Memunculkan karakter Tgl
+  //lcd.setCursor(5,0);             //Karakter dimulai pada baris 1 kolom 5
+  //lcd.print(rtc.getDateStr());    //Menampilkan data Tanggal
   /*
    * SDA                D20
    * SCL                D21
