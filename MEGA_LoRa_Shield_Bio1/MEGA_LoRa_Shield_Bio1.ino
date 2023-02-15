@@ -27,11 +27,7 @@
   * Temperature (SO)    D28
   * Level               D30
   */
-//RTC
- //lcd.setCursor(0, 0);            //Karakter dimulai pada baris 1 kolom 1
-//lcd.print("Tgl: ");             //Memunculkan karakter Tgl
-  //lcd.setCursor(5,0);             //Karakter dimulai pada baris 1 kolom 5
-  //lcd.print(rtc.getDateStr());    //Menampilkan data Tanggal
+
   /*
    * SDA                D20
    * SCL                D21
@@ -86,8 +82,8 @@ String loraMessage = "";
 
 MAX6675 thermocouple(tempSCK, tempCS, tempSO);
 
-LiquidCrystal_I2C lcd1 = LiquidCrystal_I2C (0x27, 20, 4);
-LiquidCrystal_I2C lcd2 = LiquidCrystal_I2C (0x25, 20, 4);
+LiquidCrystal_I2C lcd2 = LiquidCrystal_I2C (0x27, 20, 4);
+LiquidCrystal_I2C lcd1 = LiquidCrystal_I2C (0x25, 20, 4);
 
 DS3231 rtc (SDA, SCL);
 Time t;
@@ -246,7 +242,7 @@ void loop()
     temperatureValue = thermocouple.readCelsius();
 
     phAnalog = analogRead (phSensor);
-    finalphValue = (-0.0693 * phAnalog) + 7.3855;
+    finalphValue = (0.002888143 * phAnalog)- 0.50;
 
     if ((finalphValue >= 6.5 && finalphValue <= 7.5)  || (temperatureValue >= 20 && temperatureValue <= 30))
     {
@@ -273,6 +269,7 @@ void loop()
     //Serial.println (press1);
 
     lcd1.setCursor (14, 2);
+    
     lcd1.print (int (temperatureValue));
     //Serial.println (temperatureValue);
 
@@ -317,7 +314,7 @@ void loop()
     LoRa.print("#");
     LoRa.endPacket();
     
-    delay (1000);
+    delay (1250);
     
     Serial.println ("C7");
 }
